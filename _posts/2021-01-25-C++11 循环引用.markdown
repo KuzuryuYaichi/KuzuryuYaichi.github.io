@@ -1,0 +1,90 @@
+---
+layout: post
+title:  "C++11 循环引用"
+date:   2021-01-25 10:30:11 +0800
+categories: C++
+---
+
+C++11中的智能指针一定程度上简化了C++当中的内存管理,但shared_ptr<>的使用同时也引出了另一个问题：循环引用。
+
+#### 实例
+```cpp
+#include <iostream>
+#include <vector>
+#include <memory>
+
+using namespace std;
+
+class parent;
+class children;
+
+class parent {
+public:
+    ~parent() { std::cout << "~parent()" << std::endl; }
+
+public:
+    std::shared_ptr<children> child;
+};
+
+class children {
+public:
+    ~children() { std::cout << "~children()" << std::endl; }
+
+public:
+    std::shared_ptr<parent> parent;
+};
+
+void Verify() {
+    std::shared_ptr<parent> p(new parent);
+    std::shared_ptr<children> c(new children);
+
+    p->child = c;
+    c->parent = p;
+}
+
+int main() {
+    std::cout << "Begin" << std::endl;
+
+    Verify();
+
+    std::cout << "Done" << std::endl;
+}
+```
+
+#### 分析
+当我们想要parent对象释放时，children对象中仍保留了该parent对象的shared_ptr，导致其无法被正常释放。如果先释放children对象，parent对象中保留了该children对象的shared_ptr。这样，我们就陷入了`循环引用`。
+
+#### 解决办法
+- 手动打破"循环引用"
+```cpp
+void Verify() {
+    std::shared_ptr<parent> p(new parent);
+    std::shared_ptr<children> c(new children);
+
+    p->child = c;
+    c->parent = p;
+
+    p->child.reset();	// let it go，手动打破“循环引用”这种尴尬的局面；
+}
+```
+
+- 使用weak_ptr
+weak_ptr仅保持对对象的引用，而不负责具体的资源管理。但相比裸指针，weak_ptr提供了expired()接口，方便检测引用的对象是否已经释放，这点是裸指针所不具备的。
+
+```cpp
+class parent {
+public:
+    ~parent() { std::cout << "~parent()" << std::endl; }
+
+public:
+    std::shared_ptr<children> child;
+};
+
+class children {
+public:
+    ~children() { std::cout << "~children()" << std::endl; }
+
+public:
+    std::weak_ptr<parent> parent;	// 替换成“弱引用”
+};
+```

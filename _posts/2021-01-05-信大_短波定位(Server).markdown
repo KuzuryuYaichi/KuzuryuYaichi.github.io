@@ -1,0 +1,36 @@
+---
+layout: post
+title:  "XD_DBDW(Server)"
+date:   2021-01-25 10:30:11 +0800
+categories: C#
+---
+
+### 完成工作
+
+将多台20T在同一时刻采集的数据发送到Client
+
+### 技术要点
+
+- C#
+- Winform
+- DevExpress库
+- Mitov.Plotlab库
+- Common库
+- 滤波算法
+- 协方差矩阵
+
+### 问题汇总
+
+- 网络数据量大
+- 数据同步
+- 滤波算法
+
+### 解决方案
+
+- 使用Matlab的Filter函数效率更高
+- 在Server端做FFT后发送可以将数据量减少
+- 在Client端做同步
+
+### 资料链接
+
+- [XD_DBDW_Server](https://github.com/KuzuryuYaichi/XD_DBDW_Server)

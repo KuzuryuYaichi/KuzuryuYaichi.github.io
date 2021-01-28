@@ -1,0 +1,42 @@
+---
+layout: post
+title:  "JGZC(协议转换模块)"
+date:   2021-01-25 10:30:11 +0800
+categories: C++
+---
+
+### 完成工作
+
+将FPGA直出的UDP数据包转换为TCP数据包并转发到目的端口
+
+### 技术要点
+
+- C
+- Linux API
+- EPOLL模型
+- 协议转发
+- POSIX规范
+- Ubuntu Core系统
+- NanoPi R2S
+
+### 问题汇总
+
+- 彻底抛弃Select方式改用Epoll模型
+- 建立适应高并发消息队列的内存管理
+- Ubuntu18.04中开机免密登录不同于以往版本
+- WSL中建立编译环境并使用VSCode进行远程调试
+
+### 解决方案
+- [Ubuntu init启动流程分析](https://blog.csdn.net/kingppy/article/details/12879109)
+- [嵌入式arm-linux-gdb和 gdbserver 编译及调试](https://blog.csdn.net/allen19881119/article/details/53396318)
+- [linux开机跳过输入用户名密码](https://blog.csdn.net/qinrenzhi/article/details/92000558)
+- [Ubuntu-core开机自启程序-基于NanoPi-Fire3](https://blog.csdn.net/qq_33475105/article/details/89400313)
+- [Ubuntu Tips: How to Login Without Entering Username and Password](https://www.thegeekstuff.com/2009/07/enable-automatic-login-in-ubuntu-kubuntu/)
+- [Ubuntu 17.10 - How to open Ubuntu without a user name and password](https://askubuntu.com/questions/995822/how-to-open-ubuntu-without-a-user-name-and-password)
+- [ubuntu-18.04 设置开机启动脚本](https://www.jianshu.com/p/79d24b4af4e5)
+- [https://www.jianshu.com/p/63008656b12a](https://www.jianshu.com/p/63008656b12a)
+
+
+### 资料链接
+
+- [Transfer](https://github.com/KuzuryuYaichi/Transfer)

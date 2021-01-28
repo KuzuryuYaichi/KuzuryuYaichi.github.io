@@ -1,0 +1,39 @@
+---
+layout: post
+title:  "Tiny(转发程序)"
+date:   2021-01-25 10:30:11 +0800
+categories: C++
+---
+
+### 完成工作
+
+将FPGA输出到PCIE的数据转换为UDP数据包并转发到目的端
+UDP指令转发
+
+### 技术要点
+
+- C++
+- Qt
+- Xilinx PCIE
+- UART
+- 智能指针的使用
+- 线程安全队列的实现
+- IQ路数据转置
+- Win10单板机
+
+### 问题汇总
+
+- PCIE速率
+- PCIE数据帧错位
+- 单板机性能
+
+### 解决方案
+
+- 修改了PCIE驱动 扩大了缓冲区数量
+- 修改了PCIE驱动 令单片缓冲区连续
+- 修改应用 PCIE IO读取 减少IO读取频率 加大单次IO读取长度
+- 修改应用 Socket IO发送 将部分数据帧发送重新拼包 发送频率从每帧57次减少到6次
+
+### 资料链接
+
+- [TinyTransfer](https://github.com/KuzuryuYaichi/TinyTransfer)

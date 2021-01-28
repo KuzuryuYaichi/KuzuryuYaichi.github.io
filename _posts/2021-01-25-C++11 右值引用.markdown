@@ -5,14 +5,14 @@ date:   2021-01-25 10:30:11 +0800
 categories: C++
 ---
 
-##左值与右值
+### 左值与右值
 C++ 中，左右值定义:
 
-左值：占用了一定内存，且拥有可辨认的地址的对象
-右值：左值以外的所有对象
+- 左值：占用了一定内存，且拥有可辨认的地址的对象
+- 右值：左值以外的所有对象
 
 典型的左值，C++中绝大部分的变量都是左值
-```C++
+```cpp
 int i = 1;   // i 是左值
 int *p = &i; // i 的地址是可辨认的
 i = 2; // i 在内存中的值可以改变
@@ -22,7 +22,7 @@ A a; // 用户自定义类实例化的对象也是左值
 ```
 
 典型的右值
-```C++
+```cpp
 int i = 2; // 2 是右值
 int x = i + 2; // (i + 2) 是右值
 int *p = &(i + 2);//错误，不能对右值取地址
@@ -36,7 +36,7 @@ int i = sum(1, 2) // sum(1, 2) 是右值
 ```
 
 引用（左值引用）
-```C++
+```cpp
 int i;
 int &r = i;
 int &r = 5; // 错误，不能左值引用绑定右值
@@ -47,7 +47,7 @@ const int &r = 5;
 ```
 
 对于函数，类似地有
-```C++
+```cpp
 int square(int& a) {return a * a;}
 
 int i = 2;
@@ -62,15 +62,16 @@ int square(const int& a) {
 ```
 
 左值可以创造右值, 右值也可创造左值
-```C++
+```cpp
 int i = 2;
 int x = i + 2; // i + 2 是右值
 
 int v[3];
 // 指针解引用可以把右值转化为左值
 *(v + 1) = 2;
+```
 一些注意事项
-
+```cpp
 // 1. 函数也可以返回左值
 int myglobal ;
 int& foo() {return myglobal;}
@@ -89,16 +90,16 @@ class dog;
 dog().bark();
 ```
 
-##右值引用
+### 右值引用
 
 右值引用的两大用途：
 1.移动语意
 2.完美转发
 
-##移动语意
+#### 移动语意
 移动语意(std::move)，可以将左值转化为右值引用
 
-```C++
+```cpp
 int a = 1; // 左值
 int &b = a; // 左值引用
 
@@ -127,7 +128,7 @@ int main() {
 ```
 由于编译器调用时无法区分
 
-```C++
+```
 printInt(int) 与 printInt(int&)
 printInt(int) 与 printInt(int&&)
 ```
@@ -135,7 +136,7 @@ printInt(int) 与 printInt(int&&)
 如果再定义 printInt(int) 函数，会报错
 
 为什么需要移动语意
-```C++
+```cpp
 class myVector {
   int size;
   double* array;
@@ -182,7 +183,7 @@ int main() {
 }
 ```
 解决方法, 添加一个移动构造函数
-```C++
+```cpp
 // 移动构造函数
 myVector(myVector&& rhs) {  
     std::cout << "Move Constructor\n";
@@ -195,10 +196,10 @@ myVector(myVector&& rhs) {
 那么，foo(createMyVector())就不会调用拷贝构造函数，而会调用移动构造函数 (当然更大的可能性是编译器直接把这一步优化掉)
 
 然而，在 C++03 中，为了解决这个问题，可能需要定义两个 foo 函数，比较麻烦：
-foo_by_value(myVector)
-foo_by_ref(myVector&)
+`foo_by_value(myVector)`
+`foo_by_ref(myVector&)`
 同时，假如我们在调用 foo 之后，reusable 就不再被使用了, 可以使用移动语意
-```C++
+```cpp
 int main () {
  myVector reusable = createMyVector();
  // 这里会调用 myVector 的移动构造函数
@@ -207,21 +208,21 @@ int main () {
 }
 ```
 另一个有用之处在于重载赋值运算符
-```C++
-X& X::operator=(X const & rhs); 
-X& X::operator=(X&& rhs);
-```
+
+`X& X::operator=(X const & rhs);`
+`X& X::operator=(X&& rhs);`
+
 自从 C++11，所有的 STL 都实现了移动构造
 
-##完美转发
+#### 完美转发
 完美转发是指
 
 只有在需要的时候，才调用复制构造函数
 左值被转发为左值，右值被转发为右值
 
-###参数转发
+参数转发
 
-```C++
+```cpp
 void foo(myVector& v) {}
 
 // 参数转发
@@ -241,39 +242,41 @@ int main() {
 }
 ```
 这个实现有个问题，假如定义了两个版本的 foo
-```C++
+```cpp
 void foo(myVector& v) {}
 void foo(myVector&& v) {}
 ```
 永远只有 foo(myVector& v) 会被调用 (右值引用myVector&& v是个左值，这里的v是有名字的)
 
 所以，我们需要改写上文的 relay 函数，借助 std::forward
-```C++
+```cpp
 template<typename T>
 void relay(T&& arg) {
     foo(std::forward<T>(arg));
 }
 ```
 于是就有
-```C++
+```
 relay(reusable) 调用 foo(myVector&)
 relay(createMyVector()) 调用 foo(myVector&&)
 ```
 要解释完美转发的原理，首先引入 C++11 的引用折叠原则
-T& & => T&
-T& && => T&
-T&& & => T&
-T&& && => T&&
+
+`T& & => T&`
+`T& && => T&`
+`T&& & => T&`
+`T&& && => T&&`
+
 所以，在 relay 函数中
 
-relay(9); => T = int&& => T&& = int&& && = int&&
-relay(x); => T = int& => T&& = int& && = int &
-因此，在这种情况下，T&& 被称作 universal reference，即满足
+`relay(9); => T = int&& => T&& = int&& && = int&&`
+`relay(x); => T = int& => T&& = int& && = int &`
 
+因此，在这种情况下，T&& 被称作 universal reference，即满足
 T 是模板类型
 T 是被推导出来的，适用引用折叠，即 T 是一个函数模板类型，而不是类模板类型
 然后，C++11 定义了 remove_reference，用于返回引用指向的类型
-```C++
+```cpp
 template<class T>
 struct remove_reference; 
 
@@ -281,7 +284,7 @@ remove_reference<int&>::type == int
 remove_reference<int>::type  == int
 ```
 于是，std::forword 的实现如下
-```C++
+```cpp
 template<class T>
 T&& forward(
 typename remove_reference<T>::type& arg
@@ -291,7 +294,7 @@ typename remove_reference<T>::type& arg
 ```
 等于是把右值引用(右值引用本身是个左值)转成了右值，左值保持不变
 
-##小结
+### 小结
 
 std::move 对比 std::forward
 std::move(arg) 将 arg 转化为右值

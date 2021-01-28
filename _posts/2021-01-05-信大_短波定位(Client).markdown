@@ -1,0 +1,36 @@
+---
+layout: post
+title:  "XD_DBDW(Client)"
+date:   2021-01-25 10:30:11 +0800
+categories: C++
+---
+
+### 完成工作
+
+将FPGA输出到PCIE的数据转换为UDP数据包并转发到目的端
+UDP指令转发
+
+### 技术要点
+
+- C++
+- Qt
+- Qwt
+- Material UI
+
+### 问题汇总
+
+- 数据汇总
+- 繁复的下发指令
+- 可配置的多站Waterfall显示
+
+### 解决方案
+
+- 动态调控数据时戳使方法使缓冲与数据达到某种平衡
+- 依照原方案合并了一些繁复的指令
+- 对QwtPlot进行了封装作为Waterfall的显示控件
+- 尝试了Material风格控件
+- [QWidgetDemo](https://github.com/feiyangqingyun/QWidgetDemo)
+
+### 资料链接
+
+- [XD_Client](https://github.com/KuzuryuYaichi/XD_Client)

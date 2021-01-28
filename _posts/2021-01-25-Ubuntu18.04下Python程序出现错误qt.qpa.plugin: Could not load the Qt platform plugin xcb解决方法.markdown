@@ -1,0 +1,39 @@
+---
+layout: post
+title:  "Ubuntu18.04下Python程序出现错误qt.qpa.plugin: Could not load the Qt platform plugin xcb解决方法"
+date:   2021-01-25 10:30:11 +0800
+categories: C++
+---
+
+#### 报错
+
+在运行一个使用Pyqt5库的Python程序时，出现报错：
+
+```
+Aborted (core dumped)
+qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, wayland-egl, wayland, wayland-xcomposite-egl, wayland-xcomposite-glx, webgl, xcb.
+```
+
+#### 解决方案
+出现这个问题的可能原因主要是Qt动态链接库的问题，从问题描述来看，应该是libxcb.so库链接不正确，并且说的是“能够找到，但是无法加载”。
+
+#### 成功方案
+关于这个问题的解决方案，网上有很多都是讲解如何设置链接库，或者如何将platform/plugins等地址加入到环境变量中，我试了一下都没用。
+
+有人提到可以在你运行你的Python可执行文件之前先在终端执行下面命令：
+
+`export QT_DEBUG_PLUGINS=1`
+
+然后再执行你的可执行文件，这个时候就会列出详细的报错原因。
+
+果不其然，此时我再运行程序，列出了一个详细的错误原因的线索：
+
+`error while loading shared libraries: libxcb-xinerama.so: cannot open shared object file: No such file or directory`
+
+也就是当加载libxcb.so库时，还需要加载libxcb-xinerama库，于是安装这个库：
+
+`sudo apt-get install libxcb-xinerama0`
+
+然后再执行可执行文件，成功

@@ -1,0 +1,38 @@
+---
+layout: post
+title:  "16T(组帧转发)"
+date:   2021-01-25 10:30:11 +0800
+categories: C
+---
+
+### 完成工作
+
+将FPGA输出到DMA的数据转换为TCP数据包并转发到目的端
+
+### 技术要点
+
+- C
+- 双核AMP
+- lwip协议栈
+- Xilinx CDMA
+- SPI单色屏
+- Flash参数存储
+- 按键矩阵
+- UART
+- Zynq7000
+
+### 问题汇总
+
+- 双核的数据同步和启动顺序
+- SPI显示屏的复杂动画效果
+- 数据流的稳定性
+- 对未覆盖到的PHY芯片修改BSP
+
+### 解决方案
+- 手册
+- Z7教程电子版/纸质版
+- 多花时间调试
+
+### 资料链接
+
+<!-- - [Transfer](https://github.com/KuzuryuYaichi/Transfer) -->

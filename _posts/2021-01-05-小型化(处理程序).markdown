@@ -1,0 +1,31 @@
+---
+layout: post
+title:  "Tiny(处理程序)"
+date:   2021-01-25 10:30:11 +0800
+categories: C++
+---
+
+### 完成工作
+
+解析下位机发送的宽窄带/FFT数据并下发指令
+
+### 技术要点
+
+- C#
+- Winform
+- DevExpress库
+- Mitov.Plotlab库
+- Common库
+
+### 问题汇总
+
+- 没啥问题
+- 为了验证设备工作是否正常而做的配套软件
+
+### 解决方案
+
+- 对比JGZC简化了数据流程 增添了特化的测试项
+
+### 资料链接
+
+- [TinyServer](https://github.com/KuzuryuYaichi/TinyServer)

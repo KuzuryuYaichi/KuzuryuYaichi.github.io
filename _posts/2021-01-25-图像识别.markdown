@@ -1,0 +1,31 @@
+---
+layout: post
+title:  "图像识别"
+date:   2021-01-25 10:30:11 +0800
+categories: C++
+---
+
+### 完成工作
+
+将摄像机采集图像中分离出需要的元素并输出坐标
+
+### 技术要点
+
+- C++
+- Qt
+- OpenCV
+- 混合高斯模型
+- 二值化
+- OpenGL
+
+### 问题汇总
+
+- OpenCV的编译取舍
+- Qt与OpenCV交互常见问题
+- 自定义OpenGL控件
+
+### 解决方案
+[混合高斯背景建模原理及实现](https://blog.csdn.net/jinshengtao/article/details/26278725)
+
+### 资料链接
+[VideoMeasure](https://github.com/KuzuryuYaichi/VideoMeasure)

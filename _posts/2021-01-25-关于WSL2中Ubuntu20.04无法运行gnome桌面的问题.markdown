@@ -1,0 +1,45 @@
+---
+layout: post
+title:  "WSL2中Ubuntu20.04无法运行gnome桌面的问题"
+date:   2021-01-25 10:30:11 +0800
+categories: jekyll update
+---
+
+### WSL2 + Ubuntu 18.04
+在Win10上的WSL2中安装Ubuntu 18.04，在这个Ubuntu中安装运行gnome没问题，sudo apt install安装的gnome版本是3.28.1。
+
+实际操作步骤如下： 
+
+一、Win10这一侧，用开源的VcXsrv：
+`vcxsrv.exe -ac -wgl -fullscreen -dpms`
+ 
+二、WSL2中执行如下命令启动gnome-session并重定向DISPLAY，注意修改DISPLAY中的IP为Win10的IP（不能是127.0.0.1了，因为WSL2是真的虚拟机了；WSL1是可以用127.0.0.1的）。
+```shell
+sudo service start dbus
+sudo apt install gnome gnome-session
+export DISPLAY=192.168.2.73:0.0
+export XDG_SESSION_TYPE="x11"
+export XDG_RUNTIME_DIR=~/xdg
+export XDG_SESSION_CLASS="user"
+export XDG_SESSION_DESKTOP=ubuntu
+export XDG_CURRENT_DESKTOP=ubuntu:GNOME
+export DESKTOP_SESSION=ubuntu
+export GDMSESSION=ubuntu
+export LIBGL_ALWAYS_INDIRECT=0
+gnome-session &
+```
+
+### WSL2 + Ubuntu 20.04
+WSL2中的Ubuntu 20.04不能运行默认版本的gnome，原因是：
+
+`sudo apt install`默认安装的gnome版本是高于3.34的，而gnome从3.34版本开始就完全依赖systemd了（参考这里），WSL2中是没有systemd的，自然也就运行不了新版的gnome。
+
+但我们可以运行Cinnamon，因为Cinnamon是基于gnome的老版本改的，不依赖于systemd，所以可以运行。如下：
+```shell
+sudo apt install cinnamon-desktop-environment lightdm
+export DISPLAY=192.168.2.73:0.0
+cinnamon-session &
+```
+也可以试试在Ubuntu 20.04上安装老版本（3.34以下，不包括3.34版本）的gnome看看，我没试。
+
+XFCE这种轻量级的桌面是可以运行在很多Linux发行版上的，但界面风格太丑了。
