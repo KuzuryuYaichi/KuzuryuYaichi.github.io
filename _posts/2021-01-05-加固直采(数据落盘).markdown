@@ -1,0 +1,29 @@
+---
+layout: post
+title:  "JGZC(数据落盘)"
+date:   2021-01-25 10:30:11 +0800
+categories: C#
+---
+
+### 完成工作
+
+接收多路窄带数据同时落盘
+
+### 技术要点
+
+- C#
+- Winform
+- DevExpress库
+
+### 问题汇总
+
+- 连续相位的IQ数据落盘
+- 支持多种自定义落盘规则
+
+### 解决方案
+
+- 使用JSON做文件配置管理
+
+### 资料链接
+
+<!-- - [Transfer](https://github.com/KuzuryuYaichi/Transfer) -->

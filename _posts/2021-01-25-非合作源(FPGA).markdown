@@ -1,0 +1,30 @@
+---
+layout: post
+title:  "FHZY(FPGA)"
+date:   2021-01-25 10:30:11 +0800
+categories: VHDL
+---
+
+### 完成工作
+
+实现单芯片多PCIE 统一的子模块接口合并(这个是很有意义的)
+
+### 技术要点
+
+- VHDL
+- XDMA_PCIE
+- 统一接口
+
+### 问题汇总
+
+- 尝试将统一了接口的子模块放在一起合并程序
+- 在这个项目中首次尝试了多XDMA_PCIE核
+
+### 解决方案
+
+- 多XDMA_PCIE核需要注意对应Bank的线序
+- 多XDMA_PCIE核需要注意HardwareID的唯一性
+
+### 资料链接
+
+<!-- - [Transfer](https://github.com/KuzuryuYaichi/Transfer) -->

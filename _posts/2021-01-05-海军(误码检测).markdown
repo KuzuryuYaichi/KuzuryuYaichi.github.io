@@ -2,5 +2,28 @@
 layout: post
 title:  "HJ(误码检测)"
 date:   2021-01-25 10:30:11 +0800
-categories: C++
+categories: C#
 ---
+
+### 完成工作
+
+只是一个十分常规的误帧误码检测程序
+
+### 技术要点
+
+- C#
+- Winform
+- DevExpress插件
+- TCP通信
+
+### 问题汇总
+
+- 唯一需要特别注意的是处理TCP粘包问题
+
+### 解决方案
+
+- 使用自定义的应用层协议分割粘连的TCP数据包即可 传统处理方法
+
+### 资料链接
+
+<!-- - [Transfer](https://github.com/KuzuryuYaichi/Transfer) -->

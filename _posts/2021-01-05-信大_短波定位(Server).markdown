@@ -16,8 +16,7 @@ categories: C#
 - DevExpress库
 - Mitov.Plotlab库
 - Common库
-- 滤波算法
-- 协方差矩阵
+- 滤波算法/协方差矩阵
 
 ### 问题汇总
 

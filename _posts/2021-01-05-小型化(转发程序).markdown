@@ -15,7 +15,8 @@ UDP指令转发
 - C++
 - Qt
 - Xilinx PCIE
-- UART
+- COM
+- PCIE中间层动态链接库
 - 智能指针的使用
 - 线程安全队列的实现
 - IQ路数据转置

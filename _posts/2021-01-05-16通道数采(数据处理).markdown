@@ -4,3 +4,24 @@ title:  "16T(数据处理)"
 date:   2021-01-05 10:30:11 +0800
 categories: C++
 ---
+
+### 完成工作
+
+TCP接收多路采集数据统计并落盘
+
+### 技术要点
+
+- C#
+- Winform
+
+### 问题汇总
+
+- 时间没有修改成24小时制导致数据覆盖的问题
+
+### 解决方案
+
+- 修改一下就好了
+
+### 资料链接
+
+<!-- - [XD_DBDW_Server](https://github.com/KuzuryuYaichi/XD_DBDW_Server) -->

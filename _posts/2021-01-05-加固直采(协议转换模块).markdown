@@ -16,7 +16,7 @@ categories: C++
 - EPOLL模型
 - 协议转发
 - POSIX规范
-- Ubuntu Core系统
+- Ubuntu Core
 - NanoPi R2S
 
 ### 问题汇总

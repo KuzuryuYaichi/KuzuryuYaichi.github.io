@@ -1,20 +1,20 @@
 ---
 layout: post
-title:  "HJ(组帧转发)"
+title:  "FHZY(转发程序)"
 date:   2021-01-25 10:30:11 +0800
 categories: C++
 ---
 
 ### 完成工作
 
-将3A数据组帧并转发
+将FPGA XDMA_PCIE直出的解调数据传输给上位机
 
 ### 技术要点
 
-- C# / C++
+- C++/C#
 - Winform
 - DevExpress插件
-- PCIE中间层动态链接库
+- PCIE 中间层 动态链接库
 
 ### 问题汇总
 
@@ -22,7 +22,7 @@ categories: C++
 
 ### 解决方案
 
-- 使用自定义的应用层协议分割粘连的TCP数据包即可 传统处理方法
+- 使用应用层协议分割粘连的TCP数据包
 
 ### 资料链接
 
