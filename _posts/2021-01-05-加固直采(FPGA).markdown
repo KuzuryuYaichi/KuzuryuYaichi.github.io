@@ -28,3 +28,4 @@ categories: C++
 - 对子模块进行解耦
 
 ### 资料链接
+- [JGZC_HDL](https://github.com/KuzuryuYaichi/JGZC_HDL)

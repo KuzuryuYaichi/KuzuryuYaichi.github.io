@@ -24,4 +24,4 @@ TCP接收多路采集数据统计并落盘
 
 ### 资料链接
 
-<!-- - [XD_DBDW_Server](https://github.com/KuzuryuYaichi/XD_DBDW_Server) -->
+- [DigSampPlat_DAQ168](https://github.com/KuzuryuYaichi/DigSampPlat_DAQ168)

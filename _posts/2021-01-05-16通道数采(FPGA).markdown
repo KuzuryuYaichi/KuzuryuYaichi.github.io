@@ -31,3 +31,5 @@ categories: C++
 - 加了几条指令寄存器
 
 ### 资料链接
+
+- [DigSampPlat_HDL](https://github.com/KuzuryuYaichi/DigSampPlat_HDL)
